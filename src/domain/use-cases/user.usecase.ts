@@ -1,6 +1,5 @@
-import { ResponseUserInterface } from "../..";
-import { CreateUserDto, LoginUserDto } from "../../dtos";
-import { UserRepository } from "../../repositories/user.repository";
+import { ResponseUserInterface, UserRepository } from "..";
+import { CreateUserDto, LoginUserDto } from "../dtos";
 
 export interface UserUseCaseInterface {
   executeCreateUser(dto: CreateUserDto): Promise<ResponseUserInterface>;

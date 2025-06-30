@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly userRepository: UserRepository) {}
 
   public createUser = (req: Request, res: Response) => {
-    const createUserDto: CreateUserDto = req.body; // <--- Puedes tiparlo directamente
+    const createUserDto: CreateUserDto = req.body;
 
     new UserUseCase(this.userRepository)
       .executeCreateUser(createUserDto!)

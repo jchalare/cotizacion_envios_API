@@ -23,21 +23,23 @@ export class CreateUserDto {
   apellido!: string;
 
   @IsNotEmpty({ message: "El número de teléfono no puede estar vacío." })
-  @IsString({ message: "El número de teléfono debe ser una cadena de texto." })
   @MinLength(8, {
     message: "El número de teléfono debe tener al menos 8 caracteres.",
+  })
+  @Matches(regularExps.numerics, {
+    message: "El número de telefono debe ser numérico.",
   })
   numeroTelefono!: string;
 
   @IsNotEmpty({ message: "El número de identificación no puede estar vacío." })
-  @IsString({
-    message: "El número de identificación debe ser una cadena de texto.",
-  })
   @MinLength(5, {
     message: "El número de identificación debe tener al menos 5 caracteres.",
   })
-  @MaxLength(20, {
-    message: "El número de identificación no puede exceder los 20 caracteres.",
+  @MaxLength(15, {
+    message: "El número de identificación no puede exceder los 15 caracteres.",
+  })
+  @Matches(regularExps.numerics, {
+    message: "El número de identificación debe ser numérico.",
   })
   numeroIdentificacion!: string;
 

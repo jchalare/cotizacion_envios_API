@@ -1,8 +1,6 @@
-// src/infrastructure/sql/user.queries.ts
-
 import { pool } from "../../config/database";
 import { QueryResult } from "pg";
-import { CreateUserDto, CustomError } from "../../domain"; // Necesitarás esto si mapeas aquí o retornas una entidad parcial
+import { CreateUserDto, CustomError } from "../../domain";
 
 // Define una interfaz para los datos crudos que vienen de la base de datos
 // Esto ayuda a manejar los nombres de columna de la DB vs. los de la entidad
@@ -10,8 +8,8 @@ interface UserRawData {
   id: string;
   nombre: string;
   apellido: string;
-  numeroTelefono: string; // Nota el guion bajo
-  numeroIdentificacion: string; // Nota el guion bajo
+  numeroTelefono: string;
+  numeroIdentificacion: string;
   email: string;
   password: string; // Este es el password_hash de la DB
 }
@@ -47,7 +45,7 @@ export class UserQueries {
       ]);
       return response.rows.length > 0 ? response.rows[0] : null;
     } catch (error) {
-      console.error("Error fetching user by key value from DB:", error);
+      console.error("Error al consultar usuario: ", error);
       throw CustomError.internalServer(`${error}}`);
     }
   }

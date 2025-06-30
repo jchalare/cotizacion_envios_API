@@ -2,7 +2,6 @@ import {
   CreateUserDto,
   ResponseUserInterface,
   UserDataSource,
-  UserEntity,
   UserRepository,
 } from "../../domain";
 

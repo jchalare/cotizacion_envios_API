@@ -9,14 +9,14 @@ import { regularExps } from "../../../config";
 
 export class LoginUserDto {
   @IsNotEmpty({ message: "El número de identificación no puede estar vacío." })
-  @IsString({
-    message: "El número de identificación debe ser una cadena de texto.",
-  })
   @MinLength(5, {
     message: "El número de identificación debe tener al menos 5 caracteres.",
   })
   @MaxLength(20, {
     message: "El número de identificación no puede exceder los 20 caracteres.",
+  })
+  @Matches(regularExps.numerics, {
+    message: "El número de identificación debe ser numérico.",
   })
   numeroIdentificacion!: string;
 

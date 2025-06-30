@@ -3,7 +3,7 @@ import { CustomError } from "./custom.error";
 
 export class HandleError {
   static showError(error: Error, res: Response) {
-    console.error("Error al crear usuario:", error);
+    console.error("Error :", error);
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({ message: error.message });
     }

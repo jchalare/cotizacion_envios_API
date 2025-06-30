@@ -1,9 +1,11 @@
 import { Router } from "express";
+import {
+  UserDataSourceImpl,
+  UserRepositoryImpl,
+  validateDto,
+} from "../../infrastructure";
 import { UserController } from "./controller";
-import { UserDataSourceImpl } from "../../infrastructure/datasource/user.datasource.impl";
-import { UserRepositoryImpl } from "../../infrastructure/repositories/user.repositories.impl";
 import { CreateUserDto, LoginUserDto } from "../../domain";
-import { validateDto } from "../../infrastructure/middlewares/validation.dto.middleware";
 
 export class UserRoutes {
   static get routes(): Router {
