@@ -20,18 +20,17 @@ export class UserQueries {
   // Consulta para obtener un usuario por una clave y valor
   // Retorna UserRawData para que el DataSource pueda manejar el mapeo y la seguridad
   static async findOne(
-    key: "numeroIdentificacion" | "email", // Limita las claves permitidas
+    key: "numeroIdentificacion" | "email" | "id", // Limita las claves permitidas
     value: string
   ): Promise<UserRawData | null> {
-    // Ahora retorna UserRawData o null
-    // No necesitamos CustomError aquí, solo arrojamos un error de programación si la clave es inválida
-    // La validación de la clave ya ocurrió en el DataSource.
-    // Esto hace que UserQueries sea puramente sobre la ejecución de SQL.
     let columnName: string;
+
     if (key === "numeroIdentificacion") {
       columnName = "numero_identificacion";
     } else if (key === "email") {
       columnName = "email";
+    } else if (key === "id") {
+      columnName = "id";
     } else {
       // Esto debería ser un error que no debería ocurrir si el DataSource valida bien
       console.error(

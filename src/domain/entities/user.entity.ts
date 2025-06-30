@@ -1,5 +1,5 @@
 export class UserEntity {
-  public id: number;
+  public id: string;
   public nombre: string;
   public apellido: string;
   public numeroTelefono: string;
@@ -8,7 +8,7 @@ export class UserEntity {
   public password?: string;
 
   constructor(
-    id: number,
+    id: string,
     nombre: string,
     apellido: string,
     numeroTelefono: string,

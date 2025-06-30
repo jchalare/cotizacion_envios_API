@@ -1,16 +1,14 @@
-import { QueryResult } from "pg";
+import { UserQueries } from "..";
+import { bcryptAdapter, jwtAdapter } from "../../config";
 import {
   CreateUserDto,
   CustomError,
-  ResponseUserInterface,
   LoginUserDto,
   ResponseUserDto,
+  ResponseUserInterface,
   UserDataSource,
   UserEntity,
 } from "../../domain";
-import { bcryptAdapter } from "../../config";
-import { UserQueries } from "../sql/user.queries";
-import { JwtAdapter } from "../../config/jwt.adapter";
 
 export class UserDataSourceImpl implements UserDataSource {
   async loginUser(loginUserDto: LoginUserDto): Promise<ResponseUserInterface> {
@@ -36,7 +34,7 @@ export class UserDataSourceImpl implements UserDataSource {
 
     const { id, nombre, apellido, email } = existingUserByIdNumber;
 
-    const token = await JwtAdapter.generateToken({
+    const token = await jwtAdapter.generateToken({
       id,
       nombre,
       apellido,
@@ -74,7 +72,7 @@ export class UserDataSourceImpl implements UserDataSource {
 
       const response = await UserQueries.save(createUserDto);
 
-      const token = await JwtAdapter.generateToken({
+      const token = await jwtAdapter.generateToken({
         id: response.id,
         nombre,
         apellido,

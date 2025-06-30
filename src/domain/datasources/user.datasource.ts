@@ -1,5 +1,5 @@
+import { UserEntity } from "..";
 import { CreateUserDto, LoginUserDto } from "../dtos";
-import { UserEntity } from "../entities/user.entity";
 
 export interface ResponseUserInterface {
   user: UserEntity;
