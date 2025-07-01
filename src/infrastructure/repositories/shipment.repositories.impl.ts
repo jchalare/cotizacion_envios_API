@@ -1,5 +1,6 @@
 import {
   CreateShipmentDto,
+  GetShipmentDto,
   ShipmentDataSource,
   ShipmentEntity,
   ShipmentRepository,
@@ -12,5 +13,9 @@ export class ShipmentRepositoryImpl implements ShipmentRepository {
     createShipmentDto: CreateShipmentDto
   ): Promise<ShipmentEntity> {
     return this.shipmentDataSource.createShipment(createShipmentDto);
+  }
+
+  async getShipment(getShipmentDto: GetShipmentDto): Promise<any> {
+    return this.shipmentDataSource.getShipment(getShipmentDto);
   }
 }

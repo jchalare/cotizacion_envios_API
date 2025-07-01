@@ -36,7 +36,7 @@ export class GetQuotationDto {
   @IsNumber()
   idCiudadOrigen!: number;
 
-  @IsNotEmpty({ message: "La ciudad de origen no puede estar vacía." })
+  @IsNotEmpty({ message: "La ciudad de destino no puede estar vacía." })
   @IsNumber()
   idCiudadDestino!: number;
 

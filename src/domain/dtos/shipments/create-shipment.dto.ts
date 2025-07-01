@@ -11,10 +11,6 @@ export class CreateShipmentDto {
   @IsString()
   articulo!: string;
 
-  @IsNumber()
-  @IsOptional()
-  idTarifa?: number | null;
-
   @IsNotEmpty({ message: "El peso no puede estar vacío." })
   @IsNumber()
   @Min(1, { message: "El peso debe ser mayor a 0." })
@@ -35,11 +31,11 @@ export class CreateShipmentDto {
   @Min(1, { message: "El largo debe ser mayor a 0." })
   largo!: number;
 
-  @IsNotEmpty({ message: "La ciudad de origen no puede estar vacía." })
+  @IsNotEmpty({ message: "La ciudad de origen no puede estar vacía. fffff" })
   @IsNumber()
   idCiudadOrigen!: number;
 
-  @IsNotEmpty({ message: "La ciudad de origen no puede estar vacía." })
+  @IsNotEmpty({ message: "La ciudad de destino no puede estar vacía." })
   @IsNumber()
   idCiudadDestino!: number;
 
@@ -50,4 +46,8 @@ export class CreateShipmentDto {
   @IsNumber()
   @IsOptional()
   precioCotizacion?: number | null;
+
+  @IsString()
+  @IsOptional()
+  guia?: string | null;
 }

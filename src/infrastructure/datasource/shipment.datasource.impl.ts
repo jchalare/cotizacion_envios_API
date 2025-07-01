@@ -1,40 +1,83 @@
 import {
   CreateShipmentDto,
   CustomError,
+  GetShipmentDto,
+  ResponseShipmentDto,
   ShipmentDataSource,
+  ShipmentEntity,
 } from "../../domain";
+import { ShipmentQueries } from "../sql/shipment.queries";
 
 export class ShipmentDataSourceImpl implements ShipmentDataSource {
-  async createShipment(createShipmentDto: CreateShipmentDto): Promise<any> {
-    /*const { idCiudadOrigen, idCiudadDestino, peso } = createShipmentDto;
+  async createShipment(
+    createShipmentDto: CreateShipmentDto
+  ): Promise<ShipmentEntity> {
+    try {
+      const guia = "G-" + this.getGuia();
 
-    // Se debe realizar la cotización con el peso mayor entre peso y peso volumen (alto*ancho*largo/2500 aproximando al valor entero superior en caso de tener decimales).
-    const weightVolume = Math.ceil(
-      (createShipmentDto.alto *
-        createShipmentDto.ancho *
-        createShipmentDto.largo) /
-        2500
-    );
+      console.log(guia);
 
-    const realWeight = peso > weightVolume ? peso : weightVolume;
+      createShipmentDto.guia = guia.toString();
 
-    const rateData = await RateQueries.find(
-      idCiudadOrigen,
-      idCiudadDestino,
-      realWeight
-    );
+      const shipmentData = await ShipmentQueries.save(createShipmentDto);
 
-    if (!rateData) {
-      throw CustomError.badRequest(
-        "No se encontró una tarifa para la cotización."
+      if (!shipmentData) {
+        throw CustomError.internalServer("Error al crear el envio");
+      }
+
+      // se crea el detalle del envío
+      const createShipmentDetailDto = {
+        idEnvio: shipmentData.id,
+        item: 1,
+        estado: "En espera",
+        descripcion: "Paquete en recepción",
+      };
+
+      const shipmentDetailData = await ShipmentQueries.saveDetail(
+        createShipmentDetailDto
       );
+
+      if (!shipmentDetailData) {
+        throw CustomError.internalServer("Error al crear el detalle del envio");
+      }
+      // fin de crear el detalle del envío
+
+      const newShipment = new ResponseShipmentDto(shipmentData);
+
+      return ShipmentEntity.fromObject(newShipment);
+    } catch (error) {
+      throw CustomError.internalServer(`${error}}`);
+    }
+  }
+
+  async getShipment(getShipmentDto: GetShipmentDto): Promise<any> {
+    const { guia } = getShipmentDto;
+
+    const shipmentData = await ShipmentQueries.findOne("guia", guia);
+
+    if (!shipmentData) {
+      throw CustomError.badRequest("No se encontró el envío.");
     }
 
-    createShipmentDto.idTarifa = rateData.id;
-    createShipmentDto.precioCotizacion = rateData.precio;
+    const shipmentDetailData = await ShipmentQueries.findDetails(
+      shipmentData.id
+    );
 
-    console.log("createShipmentDto nuevo ====> ", createShipmentDto);*/
-    //const newQuotation = await QuotationQueries.save(createShipmentDto);
-    //return new QuotationEntity(newQuotation);
+    return {
+      envio: shipmentData,
+      detalles: shipmentDetailData,
+    };
+  }
+
+  private getGuia(): string {
+    let result = "";
+    const characters = "012345";
+    const charactersLength = characters.length;
+
+    for (let i = 0; i < charactersLength; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
   }
 }

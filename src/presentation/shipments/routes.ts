@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateShipmentDto } from "../../domain";
+import { CreateShipmentDto, GetShipmentDto } from "../../domain";
 import {
   ShipmentDataSourceImpl,
   ShipmentRepositoryImpl,
@@ -21,6 +21,12 @@ export class ShipmentRoutes {
       "/",
       validateDto(CreateShipmentDto),
       shipmentController.createShipment.bind(shipmentController)
+    );
+
+    router.get(
+      "/",
+      validateDto(GetShipmentDto),
+      shipmentController.getShipment.bind(shipmentController)
     );
 
     console.log(

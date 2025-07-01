@@ -50,7 +50,7 @@ export class UserQueries {
     }
   }
 
-  static async save(userData: CreateUserDto): Promise<UserRawData> {
+  static async save(createUserDto: CreateUserDto): Promise<UserRawData> {
     const query = `
       INSERT INTO usuarios (nombre, apellido, numero_telefono, numero_identificacion, email, password)
       VALUES ($1, $2, $3, $4, $5, $6)
@@ -59,12 +59,12 @@ export class UserQueries {
 
     try {
       const response: QueryResult<UserRawData> = await pool.query(query, [
-        userData.nombre,
-        userData.apellido,
-        userData.numeroTelefono,
-        userData.numeroIdentificacion,
-        userData.email,
-        userData.password,
+        createUserDto.nombre,
+        createUserDto.apellido,
+        createUserDto.numeroTelefono,
+        createUserDto.numeroIdentificacion,
+        createUserDto.email,
+        createUserDto.password,
       ]);
 
       if (response.rows.length === 0) {

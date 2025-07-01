@@ -5,8 +5,10 @@ export class ShipmentEntity {
   public ancho: number;
   public largo: number;
   public idCiudadOrigen: number;
-  public idCiudadDestino?: number;
+  public idCiudadDestino: number;
   public idUsuario?: number;
+  public guia?: number;
+  public precioCotizacion?: number;
 
   constructor(
     id: number,
@@ -16,7 +18,9 @@ export class ShipmentEntity {
     largo: number,
     idCiudadOrigen: number,
     idCiudadDestino: number,
-    idUsuario?: number
+    idUsuario?: number,
+    guia?: number,
+    precioCotizacion?: number
   ) {
     this.id = id;
     this.peso = peso;
@@ -26,6 +30,8 @@ export class ShipmentEntity {
     this.idCiudadOrigen = idCiudadOrigen;
     this.idCiudadDestino = idCiudadDestino;
     this.idUsuario = idUsuario;
+    this.guia = guia;
+    this.precioCotizacion = precioCotizacion;
   }
 
   public static fromObject(object: { [key: string]: any }): ShipmentEntity {
@@ -38,6 +44,8 @@ export class ShipmentEntity {
       idCiudadOrigen,
       idCiudadDestino,
       idUsuario,
+      guia,
+      precioCotizacion,
     } = object;
 
     if (!id) throw "Id es requerido";
@@ -47,7 +55,7 @@ export class ShipmentEntity {
     if (!largo) throw "largo es requerido";
     if (!idCiudadOrigen) throw "La ciudad origen es requerida";
     if (!idCiudadDestino) throw "La ciudad destino es requerida";
-    if (!idUsuario) throw "El usuario es requerido";
+    //if (!idUsuario) throw "El usuario es requerido";
 
     return new ShipmentEntity(
       id,
@@ -57,7 +65,9 @@ export class ShipmentEntity {
       largo,
       idCiudadOrigen,
       idCiudadDestino,
-      idUsuario
+      idUsuario,
+      guia,
+      precioCotizacion
     );
   }
 }

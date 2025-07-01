@@ -38,19 +38,28 @@ CREATE TABLE IF NOT EXISTS tarifas (
 
 CREATE TABLE IF NOT EXISTS envios (
     id SERIAL PRIMARY KEY,
-    guia VARCHAR(50) NOT NULL,
+    guia VARCHAR(50) NOT NULL UNIQUE,
     id_usuario INTEGER NOT NULL,
+    id_ciudad_origen INTEGER NOT NULL,
+    id_ciudad_destino INTEGER NOT NULL,
     articulo VARCHAR(50) NOT NULL,
     peso  NUMERIC(10, 2) NOT NULL,
     alto INTEGER NOT NULL,
     ancho INTEGER NOT NULL,
     largo INTEGER NOT NULL,
-    peso_volumen NUMERIC(10, 2) NOT NULL,
     precio_cotizacion NUMERIC(10, 2) NOT NULL,
     fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    CONSTRAINT chk_dimensiones CHECK (alto > 0 AND ancho > 0 AND largo > 0),
     CONSTRAINT usuarios_id_fkey FOREIGN KEY (id_usuario)
     REFERENCES usuarios (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    CONSTRAINT ciudades_origen_id_fkey FOREIGN KEY (id_ciudad_origen)
+    REFERENCES ciudades (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    CONSTRAINT ciudades_destino_id_fkey FOREIGN KEY (id_ciudad_destino)
+    REFERENCES ciudades (id)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
