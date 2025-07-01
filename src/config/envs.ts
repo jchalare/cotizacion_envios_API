@@ -10,6 +10,7 @@ interface EnvConfig {
   dbPort: number;
   appPort: number;
   jwtSecret: string;
+  redisUrl: string;
 }
 
 // Validaciones básicas para asegurar que las variables están definidas
@@ -30,4 +31,5 @@ export const envs: EnvConfig = {
   dbPort: parseInt(getEnvVar("POSTGRES_PORT") || "5432", 10), // Asegura que sea un número
   appPort: parseInt(getEnvVar("API_PORT") || "3000", 10),
   jwtSecret: getEnvVar("JWT_SECRET"),
+  redisUrl: getEnvVar("REDIS_URL"),
 };

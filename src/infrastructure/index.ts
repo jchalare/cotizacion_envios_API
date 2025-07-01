@@ -12,3 +12,5 @@ export * from "./repositories/quotation.repositories.impl";
 export * from "./sql/user.queries";
 export * from "./sql/shipment.queries";
 export * from "./sql/quotation.queries";
+
+export * from "./cache/cache.service";
