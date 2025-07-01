@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { UserRoutes } from "./users/routes";
 import { AuthMiddleware } from "../infrastructure";
-import { ShipmentRoutes } from "./shipments/routes";
 import { QuotationRoutes } from "./quotations/routes";
+import { UserRoutes } from "./users/routes";
+import { ShipmentRoutes } from "./shipments/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -11,6 +11,7 @@ export class AppRoutes {
     console.log("🗺️ [ROUTES] Registering routes...");
 
     router.use("/api/users", UserRoutes.routes); // Rutas de usuarios
+
     router.use(
       "/api/shipments",
       AuthMiddleware.validateJWT,

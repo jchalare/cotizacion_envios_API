@@ -8,7 +8,6 @@ import {
 
 export class QuotationController {
   constructor(private readonly quotationRepository: QuotationRepository) {}
-
   public getQuotation = (req: Request, res: Response) => {
     const getQuotationDto: GetQuotationDto = req.body;
 

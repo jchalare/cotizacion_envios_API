@@ -2,7 +2,7 @@ import { UserEntity } from "..";
 import { CreateUserDto, LoginUserDto } from "../dtos";
 
 export interface ResponseUserInterface {
-  user: UserEntity;
+  usuario: UserEntity;
   token: any;
 }
 

@@ -51,7 +51,7 @@ export class CreateUserDto {
   @IsString({ message: "La contraseña debe ser una cadena de texto." })
   @Matches(regularExps.password, {
     message:
-      "La contraseña debe  al menos 8 caracteres, al menos un número y al menos una letra.",
+      "La contraseña debe tener al menos 8 caracteres, al menos un número y al menos una letra.",
   })
   password!: string;
 }

@@ -43,7 +43,7 @@ export class UserDataSourceImpl implements UserDataSource {
     const logedUser = new ResponseUserDto(existingUserByIdNumber);
 
     return {
-      user: UserEntity.fromObject(logedUser.showPublicUserData()),
+      usuario: UserEntity.fromObject(logedUser.showPublicUserData()),
       token: token,
     };
   }
@@ -82,7 +82,7 @@ export class UserDataSourceImpl implements UserDataSource {
       const newUser = new ResponseUserDto(response);
 
       return {
-        user: UserEntity.fromObject(newUser.showPublicUserData()),
+        usuario: UserEntity.fromObject(newUser.showPublicUserData()),
         token: token,
       };
     } catch (error) {

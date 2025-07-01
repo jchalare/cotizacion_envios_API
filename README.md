@@ -35,3 +35,9 @@ docker compose up -d
 ```
 npm run dev
 ```
+
+6. Para ver la documentación de la API
+
+<p align="left">
+ <a href="http://localhost:3000/documentation" target="blank">Swagger UI Documentation</a>
+</p>
