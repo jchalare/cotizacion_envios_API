@@ -7,7 +7,15 @@
 </p>
 
 <p align="center">
- <a href="https://www.typescriptlang.org/" target="blank"><img src="https://cdn.iconscout.com/icon/free/png-512/free-typescript-3521774-2945272.png?f=avif&w=256" width="200" alt="Ts Logo" /></a>
+ <a href="https://www.typescriptlang.org/" target="blank"><img src="https://cdn.iconscout.com/icon/free/png-512/free-typescript-3521774-2945272.png?f=avif&w=256" width="100" alt="Ts Logo" /></a>
+</p>
+
+<p align="center">
+ <a href="https://www.redis.io/" target="blank"><img src="https://www.vectorlogo.zone/logos/redis/redis-official.svg" width="200" alt="Redis Logo" /></a>
+</p>
+
+<p align="center">
+ <a href="https://www.swagger.io/" target="blank"><img src="https://www.svgrepo.com/show/354420/swagger.svg" width="100" alt="swagger Logo" /></a>
 </p>
 
 ## Cotización & gestion de envíos

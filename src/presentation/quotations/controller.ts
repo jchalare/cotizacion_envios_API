@@ -13,8 +13,8 @@ export class QuotationController {
 
     new QuotationUseCase(this.quotationRepository)
       .executeGetQuotation(getQuotationDto!)
-      .then((user) => {
-        res.status(201).json(user);
+      .then((quotation) => {
+        res.status(201).json(quotation);
       })
       .catch((error) => {
         HandleError.showError(error, res);

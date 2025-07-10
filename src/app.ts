@@ -1,6 +1,8 @@
+import { createServer } from "http";
 import { envs } from "./config/envs";
 import { AppRoutes } from "./presentation/routes";
 import { Server } from "./presentation/server";
+import { WssService } from "./presentation/services/websocket.service";
 
 (async () => {
   try {
@@ -21,6 +23,12 @@ function app() {
     routes: routes,
   });
 
+  /*const httpServer = createServer(server.app);
+  WssService.initWebsocketServer({ server: httpServer });
+
   console.log("🎆 [APP] Starting server...");
+  httpServer.listen(envs.appPort, () => {
+    console.log(`✅ [APP] Server is running on port ${envs.appPort}`);
+  });*/
   server.start();
 }

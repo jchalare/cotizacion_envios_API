@@ -6,10 +6,8 @@ import {
   ShipmentRepository,
   ShipmentUseCase,
 } from "../../domain";
-import { redisClient } from "../../config";
-import { cacheService } from "../../infrastructure";
 
-const SHIPMENT_CACHE_TTL_SECONDS = 3600; //  1 hora
+//const SHIPMENT_CACHE_TTL_SECONDS = 3600; //  1 hora
 
 export class ShipmentController {
   constructor(private readonly shipmentRepository: ShipmentRepository) {}
@@ -27,7 +25,18 @@ export class ShipmentController {
       });
   };
 
-  public getShipment = async (req: Request, res: Response): Promise<any> => {
+  public getShipment = (req: Request, res: Response) => {
+    const getShipmentDto: GetShipmentDto = req.body;
+    new ShipmentUseCase(this.shipmentRepository)
+      .executeGetShipment(getShipmentDto!)
+      .then((shipment) => {
+        res.status(200).json(shipment);
+      })
+      .catch((error) => {
+        HandleError.showError(error, res);
+      });
+  };
+  /*public getShipment = async (req: Request, res: Response): Promise<any> => {
     const getShipmentDto: GetShipmentDto = req.body;
 
     const { guia } = getShipmentDto;
@@ -59,5 +68,5 @@ export class ShipmentController {
     } catch (error) {
       HandleError.showError(error as Error, res);
     }
-  };
+  };*/
 }

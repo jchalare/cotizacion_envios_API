@@ -3,6 +3,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { connectRedis, disconnectRedis, swaggerSpec } from "../config";
 import responseTime from "response-time";
+import { WssService } from "./services/websocket.service";
 
 interface Options {
   port: number;
@@ -29,9 +30,6 @@ export class Server {
       console.log("✅ [SERVER] Redis conectado exitosamente.");
     } catch (error) {
       console.error("❌ [SERVER] No se pudo conectar a Redis:", error);
-      // Decide si quieres que la aplicación falle si Redis no se conecta.
-      // Por ahora, solo logueamos el error, pero la aplicación continuará.
-      // Si Redis es crítico, podrías usar `process.exit(1);` aquí.
     }
 
     //* Middlewares
@@ -51,7 +49,7 @@ export class Server {
     this.app.use(responseTime());
 
     //* Routes
-    this.app.use(this.routes);
+    //this.app.use(this.routes);
 
     console.log("🚀 [SERVER] Starting HTTP server...");
     const httpServer = this.app.listen(this.port, () => {
@@ -59,6 +57,9 @@ export class Server {
         `✅ [SERVER] API Base URL: http://localhost:${this.port}/api`
       );
     });
+    WssService.initWebsocketServer({ server: httpServer });
+
+    this.app.use(this.routes);
 
     // * Manejo de cierre de la aplicación para desconectar Redis
     // Estas señales son enviadas por el sistema operativo al intentar cerrar el proceso
@@ -94,5 +95,9 @@ export class Server {
         `✅ [SERVER] API Base URL: http://localhost:${this.port}/api`
       );
     });*/
+  }
+
+  public setRoutes(routes: Router) {
+    this.app.use(routes);
   }
 }
